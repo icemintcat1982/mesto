@@ -1,7 +1,8 @@
 .page {
     max-width: 880px;
     min-height: 100%;
-    margin: auto;
+    margin: 0 auto;
+    padding: 0 19px;
     background-color: #000000;
     color: #ffffff;
     font-family: 'Inter', Arial, Helvetica, sans-serif;

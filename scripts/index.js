@@ -1,4 +1,4 @@
-const POPUP_ACTIVE_CLASS = "popup__active";
+const POPUP_ACTIVE_CLASS = "popup_active";
 
 const openPopupBtn = document.querySelector(".profile__button_type_edit");
 const popup = document.querySelector(".popup");

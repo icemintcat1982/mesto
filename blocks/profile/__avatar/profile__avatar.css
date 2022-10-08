@@ -7,3 +7,7 @@
     display: block;
     object-fit: cover;
 }
+
+.profile__avatar:hover {
+    opacity: 0.7;
+}

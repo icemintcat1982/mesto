@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./pages/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="./scripts/scripts.js"></script>
-    <title>Mesto</title>
+    <script defer src="./scripts/index.js"></script>
+    <title>Место</title>
 </head>
 
 <body class="page">
@@ -89,17 +89,14 @@
         <div class="popup__edit-form">
             <button class="popup__close" type="button" title="close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form">
+            <form class="popup__form" name="profile_form">
                 <fieldset class="popup__fieldset">
                     <input class="popup__input popup__input_name" name="name" type="text">
-                </fieldset>
-                <fieldset class="popup__fieldset">
                     <input class="popup__input popup__input_description" name="description" type="text">
                 </fieldset>
                 <button class="popup__submit" type="submit" title="submit">Сохранить</button>
             </form>
         </div>
     </section>
-
 </body>
 </html>
