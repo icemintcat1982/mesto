@@ -60,10 +60,9 @@ const initialCards = [
     cardItem.querySelector(".element__image").alt = element.name;
     cardItem.querySelector(".element__button").addEventListener("click", function(evt) {
         evt.target.classList.toggle("element__button_active");
-    });
-
     cardItem.querySelector(".element__delete").addEventListener("click", function(evt) {
-        evt.target.closest(".element__card").remove();
+            evt.target.closest(".element__card").remove();
+    });
     });
 
     return cardItem;
@@ -150,8 +149,8 @@ function openPopupPhoto(evt) {
     openPopup(popupPhoto,evt);
 }
 
-cardPhoto.addEventListener("click", openPopupPhoto);
-
+//cardPhoto.addEventListener("click", openPopupPhoto);
+//
 
 function closePopupPhoto (evt) {
     closePopup(popupPhoto, evt);
