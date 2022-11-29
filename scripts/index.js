@@ -19,7 +19,7 @@ const placeInput = document.querySelector(".popup__input_place");
 const linkInput = document.querySelector(".popup__input_link");
 const cardElements = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#element__card").content;
-const popupPhoto = document.querySelector(".popup__open-photo");
+const popupPhoto = document.querySelector(".popup_photo-open");
 const contentPhoto = document.querySelector(".popup__photo");
 const captionPhoto = document.querySelector(".popup__caption");
 const cardPhoto = document.querySelector(".element__image");
@@ -60,13 +60,17 @@ const initialCards = [
     cardItem.querySelector(".element__image").alt = element.name;
     cardItem.querySelector(".element__button").addEventListener("click", function(evt) {
         evt.target.classList.toggle("element__button_active");
+    })
     cardItem.querySelector(".element__delete").addEventListener("click", function(evt) {
             evt.target.closest(".element__card").remove();
     });
-    });
-
+    cardItem.querySelector(".element__image").addEventListener("click", function(evt) {
+        contentPhoto.src = element.link;
+        captionPhoto.textContent = element.name;
+        contentPhoto.alt = element.name;
+        openPopup(popupPhoto);
+    })
     return cardItem;
-
 };
 
   initialCards.forEach(function(element) {
@@ -76,7 +80,6 @@ const initialCards = [
 
 function addCardSubmit(evt) {
    evt.preventDefault();
-
 const newPlaceName = placeInput.value;
 const newPlaceLink = linkInput.value;
 const newCard = createCard({
@@ -93,7 +96,6 @@ closePopupCard();
 
 popupCard.addEventListener("submit", addCardSubmit); 
 
-
 function openPopup(popup, evt) {
     popup.classList.add(POPUP_ACTIVE_CLASS);
 };
@@ -102,7 +104,6 @@ function openPopupProfile() {
     popup.classList.add(POPUP_ACTIVE_CLASS);
     nameInput.value = editProfileName.textContent;
     decriptionInput.value = editProfileDescription.textContent;
-
 };
 
 openPopupBtn.addEventListener("click", openPopupProfile);
@@ -118,7 +119,7 @@ form.addEventListener("submit", formSubmitHandler);
 
 function openPopupCard(evt) {
     openPopup(popupCard, evt);
-}
+};
 
 openPopupAddCard.addEventListener("click", openPopupCard);
 
@@ -131,30 +132,19 @@ function closePopup(popup, evt) {
 
 function closePopupProfile(evt) {
     closePopup(popupProfile, evt);    
-}
+};
 
 popupProfile.addEventListener("click", closePopupProfile);
 
 function closePopupCard(evt) {
     closePopup(popupCard, evt);
-}
+};
 
 popupCard.addEventListener("click", closePopupCard);
 
-
-function openPopupPhoto(evt) {
-    contentPhoto.img = cardItem.src;
-    contentPhoto.textContent = cardItem.name;
-    contentPhoto.alt = cardItem.name;
-    openPopup(popupPhoto,evt);
-}
-
-//cardPhoto.addEventListener("click", openPopupPhoto);
-//
-
 function closePopupPhoto (evt) {
     closePopup(popupPhoto, evt);
-}
+};
 
 popupPhoto.addEventListener("click", closePopupPhoto);
 
