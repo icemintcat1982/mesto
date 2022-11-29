@@ -6,7 +6,7 @@ const popup = document.querySelector(".popup");
 const popupProfile = document.querySelector(".popup_profile-submit");
 const popupCard = document.querySelector(".popup_card-submit");
 const popupEditForm = popup.querySelector(".popup__edit-form");
-const popupAddCard = popup.querySelector(".popup__add-card");
+const popupAddCard = popup.querySelector(".popup__form_card");
 const popupCloseBtn = popup.querySelector(".popup__close");
 const popupCardCloseBtn = popup.querySelector(".popup__close-card");
 const form = document.querySelector(".popup__form");
@@ -17,9 +17,13 @@ const editProfileDescription = document.querySelector(".profile__description");
 const saveChanges = document.querySelector(".popup__submit");
 const placeInput = document.querySelector(".popup__input_place");
 const linkInput = document.querySelector(".popup__input_link");
-
 const cardElements = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#element__card").content;
+const popupPhoto = document.querySelector(".popup__open-photo");
+const contentPhoto = document.querySelector(".popup__photo");
+const captionPhoto = document.querySelector(".popup__caption");
+const cardPhoto = document.querySelector(".element__image");
+
 
 const initialCards = [
     {
@@ -54,35 +58,64 @@ const initialCards = [
     cardItem.querySelector(".element__text").textContent = element.name;
     cardItem.querySelector(".element__image").src = element.link;
     cardItem.querySelector(".element__image").alt = element.name;
+    cardItem.querySelector(".element__button").addEventListener("click", function(evt) {
+        evt.target.classList.toggle("element__button_active");
+    });
+
+    cardItem.querySelector(".element__delete").addEventListener("click", function(evt) {
+        evt.target.closest(".element__card").remove();
+    });
+
     return cardItem;
-}
+
+};
 
   initialCards.forEach(function(element) {
     const card = createCard(element);
     cardElements.prepend(card);
- })
+ });
 
-const addCardSubmit = (evt) => {
+function addCardSubmit(evt) {
    evt.preventDefault();
 
-cardElements.prepend(createCard({
-    link: linkInput.value,
-    name: placeInput.value
-}));
+const newPlaceName = placeInput.value;
+const newPlaceLink = linkInput.value;
+const newCard = createCard({
+name: newPlaceName, 
+link: newPlaceLink, 
+alt: newPlaceName
+});
+cardElements.prepend(newCard);
 
-  }
+placeInput.value = " ";
+linkInput.value = " ";
+closePopupCard();
+};
+
+popupCard.addEventListener("submit", addCardSubmit); 
+
 
 function openPopup(popup, evt) {
     popup.classList.add(POPUP_ACTIVE_CLASS);
-}
+};
 
-function openPopupProfile(evt) {
+function openPopupProfile() {
+    popup.classList.add(POPUP_ACTIVE_CLASS);
     nameInput.value = editProfileName.textContent;
     decriptionInput.value = editProfileDescription.textContent;
-    openPopup(popupProfile, evt);
-}
+
+};
 
 openPopupBtn.addEventListener("click", openPopupProfile);
+
+function formSubmitHandler(evt) {
+    evt.preventDefault();
+    editProfileName.textContent = nameInput.value;
+    editProfileDescription.textContent = decriptionInput.value; 
+    popup.classList.remove(POPUP_ACTIVE_CLASS);
+};
+
+form.addEventListener("submit", formSubmitHandler);
 
 function openPopupCard(evt) {
     openPopup(popupCard, evt);
@@ -90,11 +123,12 @@ function openPopupCard(evt) {
 
 openPopupAddCard.addEventListener("click", openPopupCard);
 
+
 function closePopup(popup, evt) {
     if (!popup.querySelector(".popup__content").contains(event.target) || event.target === popup.querySelector(".popup__close")) {
         popup.classList.remove(POPUP_ACTIVE_CLASS);
     }
-}
+};
 
 function closePopupProfile(evt) {
     closePopup(popupProfile, evt);    
@@ -106,13 +140,27 @@ function closePopupCard(evt) {
     closePopup(popupCard, evt);
 }
 
-popupCard.addEventListener("click",closePopupCard);
+popupCard.addEventListener("click", closePopupCard);
 
-function formSubmitHandler(evt) {
-    evt.preventDefault();
-    editProfileName.textContent = nameInput.value;
-    editProfileDescription.textContent = decriptionInput.value; 
-    popup.classList.remove(POPUP_ACTIVE_CLASS);
+
+function openPopupPhoto(evt) {
+    contentPhoto.img = cardItem.src;
+    contentPhoto.textContent = cardItem.name;
+    contentPhoto.alt = cardItem.name;
+    openPopup(popupPhoto,evt);
 }
+
+cardPhoto.addEventListener("click", openPopupPhoto);
+
+
+function closePopupPhoto (evt) {
+    closePopup(popupPhoto, evt);
+}
+
+popupPhoto.addEventListener("click", closePopupPhoto);
+
+
+
+
 
 
