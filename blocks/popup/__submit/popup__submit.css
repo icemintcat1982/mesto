@@ -9,6 +9,7 @@
     line-height: 17px;
     color: #FFFFFF;
     cursor: none;
+    border: none;
 }
 
 .popup__submit:hover {
@@ -19,6 +20,7 @@
 @media screen and (max-width: 767px) {
     .popup__submit {
         width: 238px;
-        margin: 0 auto 25px;
+        margin: 0;
+        padding: 0;
     }
 }
