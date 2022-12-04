@@ -3,6 +3,7 @@ const POPUP_ACTIVE_CLASS = "popup_active";
 const BtnOpenPopup = document.querySelector(".profile__button_type_edit");
 const PopupAddCardOpen = document.querySelector(".profile__button_type_add");
 const popup = document.querySelector(".popup");
+const popupContent = popup.querySelector(".popup__content");
 const popupProfile = document.querySelector(".popup_profile-submit");
 const popupCard = document.querySelector(".popup_card-submit");
 const popupEditForm = popup.querySelector(".popup__edit-form");
@@ -126,9 +127,9 @@ PopupAddCardOpen.addEventListener("click", openPopupCard);
 
 
 function closePopup(popup, evt) {
-   if (!popup.querySelector(".popup__content").contains(evt.target) || evt.target === popup.querySelector(".popup__close")) {
-        popup.classList.remove(POPUP_ACTIVE_CLASS);
-    }};
+  if (!popup.querySelector(".popup__content").contains(evt.target) || evt.target === popup.querySelector(".popup__close")) {
+  popup.classList.remove(POPUP_ACTIVE_CLASS);
+}};
 
 function closePopupProfile(evt) {
     closePopup(popupProfile, evt);    
@@ -150,6 +151,11 @@ popupPhoto.addEventListener("click", closePopupPhoto);
 
 
 
+
+//function closePopup(popup) {
+    //popup.classList.remove(POPUP_ACTIVE_CLASS);
+    //popupCloseBtn.addEventListener("click", evt)
+//};
 
 
 
