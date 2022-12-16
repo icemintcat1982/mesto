@@ -24,6 +24,8 @@ const cardTemplate = document.querySelector("#element__card").content;
 const popupPhoto = document.querySelector(".popup_photo_open");
 const contentPhoto = document.querySelector(".popup__photo");
 const captionPhoto = document.querySelector(".popup__caption");
+const popupInput = popup.querySelector(".popup__input");
+
 
 const initialCards = [
     {
@@ -104,7 +106,10 @@ popupCard.addEventListener("submit", addCardSubmit);
 
 function openPopup(popup) {
     popup.classList.add(POPUP_ACTIVE_CLASS);
+    document.addEventListener("keyup", closePopupEsc);
+    popup.addEventListener("click", closePopupOverlay);
 }
+// почему закрывается окно добавления карточки???
 
 function openPopupProfile(evt) {
     nameInput.value = profileNameEdit.textContent;
@@ -131,7 +136,25 @@ popupAddCardOpen.addEventListener("click", openPopupCard);
 
 function closePopup(popup) {
     popup.classList.remove(POPUP_ACTIVE_CLASS);
+    document.removeEventListener("keyup", closePopupEsc);
+    popup.removeEventListener("click", closePopupOverlay);
+
 }
+
+function closePopupEsc(evt) {
+    if(evt.key === "Escape") {
+        const popupOpened = document.querySelector(".popup_active");
+        closePopup(popupOpened);
+    };
+}
+
+function closePopupOverlay (evt) {
+if (!popup.querySelector(".popup__form").contains(evt.target)) { 
+    const popupOpened = document.querySelector(".popup_active");
+    closePopup(popupOpened); 
+
+} }
+
 
 function closePopupProfile(evt) {
     closePopup(popupProfile, evt);
@@ -147,3 +170,61 @@ function closePopupPhoto(evt) {
     closePopup(popupPhoto, evt);
 }
 popupPhotoCloseBtn.addEventListener("click", closePopupPhoto);
+
+
+//?????????????
+
+
+const showInputError = (form, popupInput, errorMessage) => {
+    const errorPopup = form.querySelector(`.${popupInput.id}-error`)
+    popupInput.classList.add("popup__input-error");
+    errorPopup.textContent = errorMessage;
+    errorPopup.classList.add("popup__input-error_active");
+
+    
+}
+
+const hideInputError = (form, popupInput) => {
+    const errorPopup = form.querySelector(`.${popupInput.id}-error`)
+    popupInput.classList.remove("popup__input-error");
+    errorPopup.classList.remove("popup__input-error_active");
+    errorPopup.textContent = "";
+    
+}
+
+
+// const isValid = (form, popupInput) => {
+//     if (!popupInput.validity.valid) {
+//         showInputError(form, popupInput, popupInput.validationMessage);
+//     } else {
+//         hideInputError(form, popupInput);
+//     };
+// }
+
+
+// const setEventListener = (form) => {
+//     const inputList = Array.from(form.querySelectorAll(".popup__input"));
+//     inputList.forEach((popupInput) => {
+//        popupInput.addEventListener("input", () => {
+//         isValid(form, popupInput);
+//        }) ;      
+//     });
+// }
+
+// const enableValidation = () => {
+//     const popupList = Array.from(document.querySelectorAll(".popup"));
+//     popupList.forEach((form) => {
+//         setEventListener(form);
+//     });
+// }
+
+// const hasInvalidInput = (inputList) => {
+//     return inputList.some((popupInput) => {
+//         return !popupInput.validity.valid;
+//     })
+// }
+
+
+
+
+// enableValidation();
