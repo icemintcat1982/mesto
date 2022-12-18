@@ -1,7 +1,7 @@
 
 
 function showInputError(object, form, input, errorMessage) {
-    const error = form.querySelector(`.#${input.id}-error`)
+    const error = form.querySelector(`#${input.id}-error`)
     input.classList.add(object.inputErrorClass);
     error.textContent = errorMessage;
     error.classList.add(object.errorClass);
@@ -9,7 +9,7 @@ function showInputError(object, form, input, errorMessage) {
 }
 
 function hideInputError(object, form, input) {
-    const error = form.querySelector(`.#${input.id}-error`)
+    const error = form.querySelector(`#${input.id}-error`)
     input.classList.remove(object.inputErrorClass);
     error.classList.remove(object.errorClass);
     error.textContent = "";
@@ -58,6 +58,7 @@ function setEventListener(object, form) {
 
 function enableValidation(object) {
     const popupList = Array.from(document.querySelectorAll(object.formSelector));
+    console.log(popupList);
     popupList.forEach((form) => {
         setEventListener(object, form);
     });
