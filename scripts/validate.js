@@ -27,7 +27,8 @@ function isValid(object, form, input) {
 }
 
 
-function hasInvalidInput(object, input) {
+function hasInvalidInput(inputList
+    ) {
     return inputList.some((input) => {
         return !input.validity.valid;
     })
@@ -45,23 +46,22 @@ function toggleBtnState(object, inputList, submitBtn ) {
 
 
 
-const setEventListener = (object, form) => {
-    const inputList = Array.from(form.querySelectorAll(input));
-    const submitBtn = form.querySelector(submitBtn);
+function setEventListener(object, form) {
+    const inputList = Array.from(form.querySelectorAll(object.inputSelector));
+    const submitBtn = form.querySelector(object.submitBtnSelector);
     inputList.forEach((input) => {
        input.addEventListener("input", () => {
         isValid(object, form, input);
-        toggleBtnState(inputList, submitBtn);
+        toggleBtnState( object, inputList, submitBtn);
        }) ;      
     });
 }
 
 
-const enableValidation = () => {
-    const {formSelector, inputSelector, submitBtnSelector, offBtnSelector, inputErrorClass, errorClass} = object;
-    const popupList = Array.from(document.querySelectorAll(object.form));
+function enableValidation(object) {
+    const popupList = Array.from(document.querySelectorAll(object.formSelector));
     popupList.forEach((form) => {
-        setEventListener(form);
+        setEventListener(object, form);
     });
 }
 
