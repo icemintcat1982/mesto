@@ -26,7 +26,6 @@ const contentPhoto = document.querySelector(".popup__photo");
 const captionPhoto = document.querySelector(".popup__caption");
 const popupInput = popup.querySelector(".popup__input");
 
-
 const initialCards = [
     {
         name: "Архыз",
@@ -110,7 +109,6 @@ function openPopup(popup) {
     popup.addEventListener("click", closePopupOverlay);
 }
 
-
 function openPopupProfile(evt) {
     nameInput.value = profileNameEdit.textContent;
     decriptionInput.value = profileDescriptionEdit.textContent;
@@ -138,22 +136,20 @@ function closePopup(popup) {
     popup.classList.remove(POPUP_ACTIVE_CLASS);
     document.removeEventListener("keyup", closePopupEsc);
     popup.removeEventListener("click", closePopupOverlay);
-
 }
 
 function closePopupEsc(evt) {
-    if(evt.key === "Escape") {
+    if (evt.key === "Escape") {
         const popupOpened = document.querySelector(".popup_active");
         closePopup(popupOpened);
-    };
+    }
 }
 
-function closePopupOverlay (evt) {
-if (evt.target === evt.currentTarget) {
-    closePopup(evt.target.closest(".popup"));
-};
+function closePopupOverlay(evt) {
+    if (evt.target === evt.currentTarget) {
+        closePopup(evt.target.closest(".popup"));
+    }
 }
-
 
 function closePopupProfile(evt) {
     closePopup(popupProfile, evt);
@@ -169,85 +165,3 @@ function closePopupPhoto(evt) {
     closePopup(popupPhoto, evt);
 }
 popupPhotoCloseBtn.addEventListener("click", closePopupPhoto);
-
-
-
-// function showInputError(form, popupInput, errorMessage) {
-//     const errorPopup = form.querySelector(`.${popupInput.id}-error`)
-//     popupInput.classList.add("popup__input-error");
-//     errorPopup.textContent = errorMessage;
-//     errorPopup.classList.add("popup__input-error_active");
-
-    
-// }
-
-
-// function hideInputError(form, popupInput) {
-//     const errorPopup = form.querySelector(`.${popupInput.id}-error`)
-//     popupInput.classList.remove("popup__input-error");
-//     errorPopup.classList.remove("popup__input-error_active");
-//     errorPopup.textContent = "";
-    
-// }
-
-
-// function isValid(form, popupInput) {
-//     if (!popupInput.validity.valid) {
-//         showInputError(form, popupInput, popupInput.validationMessage);
-//     } else {
-//         hideInputError(form, popupInput);
-//     };
-// }
-
-
-// function hasInvalidInput(inputList) {
-//     return inputList.some((popupInput) => {
-//         return !popupInput.validity.valid;
-//     })
-// }
-
-// function toggleBtnState(inputList, changesSave) {
-//     if (hasInvalidInput(inputList)) {
-//         changesSave.classList.add("popup__submit_inactive");
-//         changesSave.disabled = true;
-//     } else {
-//         changesSave.classList.remove("popup__submit_inactive");
-//         changesSave.disabled = false;
-//     };
-// }
-
-
-
-// const setEventListener = (form) => {
-//     const inputList = Array.from(form.querySelectorAll(".popup__input"));
-//     const changesSave = form.querySelector(".popup__submit");
-//     inputList.forEach((popupInput) => {
-//        popupInput.addEventListener("input", () => {
-//         isValid(form, popupInput);
-//         toggleBtnState(inputList, changesSave);
-//        }) ;      
-//     });
-// }
-
-
-// const enableValidation = () => {
-//     const popupList = Array.from(document.querySelectorAll(".popup"));
-//     popupList.forEach((form) => {
-//         setEventListener(form);
-//     });
-// }
-
-
-
-
-// enableValidation ({
-//     formSelector: ".form",
-//     inputSelector: ".popup__input",
-//     submitBtnSelector: ".popup__submit",
-//     offBtnSelector: ".popup__submit_inactive",
-//     inputErrorClass: ".popup__input-error",
-//     errorClass: ".popup__input-error_active"
-// })
-
-
-
