@@ -249,3 +249,4 @@ popupPhotoCloseBtn.addEventListener("click", closePopupPhoto);
 // }
 
 // enableValidation(object);
+

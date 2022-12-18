@@ -1,16 +1,15 @@
 
 
 function showInputError(object, form, input, errorMessage) {
-    const error = form.querySelector(`.${input.id}-error`)
+    const error = form.querySelector(`.#${input.id}-error`)
     input.classList.add(object.inputErrorClass);
     error.textContent = errorMessage;
     error.classList.add(object.errorClass);
-
-    
+ 
 }
 
 function hideInputError(object, form, input) {
-    const error = form.querySelector(`.${input.id}-error`)
+    const error = form.querySelector(`.#${input.id}-error`)
     input.classList.remove(object.inputErrorClass);
     error.classList.remove(object.errorClass);
     error.textContent = "";
@@ -27,10 +26,9 @@ function isValid(object, form, input) {
 }
 
 
-function hasInvalidInput(inputList
-    ) {
-    return inputList.some((input) => {
-        return !input.validity.valid;
+function hasInvalidInput(inputList) {
+    return inputList.some((inputElement) => {
+        return !inputElement.validity.valid;
     })
 }
 
@@ -67,15 +65,13 @@ function enableValidation(object) {
 
 
 
-const object = {
+enableValidation({
     formSelector: ".form",
     inputSelector: ".popup__input",
     submitBtnSelector: ".popup__submit",
     offBtnSelector: ".popup__submit_inactive",
     inputErrorClass: ".popup__input-error",
     errorClass: ".popup__input-error_active"
-}
-
-enableValidation(object);
+});
 
 
