@@ -239,18 +239,6 @@ popupPhotoCloseBtn.addEventListener("click", closePopupPhoto);
 
 
 
-
-
-
-// // function showInputError(object, formSelector, inputSelector, errorMessage) {
-// //     const errorClass = formSelector.querySelector(`.${inputSelector.id}-error`)
-// //     inputSelector.classList.add(object.inputErrorClass);
-// //     errorClass.textContent = errorMessage;
-// //     errorClass.classList.add(object.errorClass);
-
-    
-// // }
-
 // const object = {
 //     formSelector: ".form",
 //     inputSelector: ".popup__input",

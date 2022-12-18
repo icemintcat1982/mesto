@@ -36,10 +36,10 @@ function hasInvalidInput(inputList
 
 function toggleBtnState(object, inputList, submitBtn ) {
     if (hasInvalidInput(inputList)) {
-        submitBtn.classList.add(object.offBtn);
+        submitBtn.classList.add(object.offBtnSelector);
         submitBtn.disabled = true;
     } else {
-        submitBtn.classList.remove(object.offBtn);
+        submitBtn.classList.remove(object.offBtnSelector);
        submitBtn.disabled = false;
     };
 }
