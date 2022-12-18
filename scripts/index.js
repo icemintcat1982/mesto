@@ -171,6 +171,7 @@ function closePopupPhoto(evt) {
 popupPhotoCloseBtn.addEventListener("click", closePopupPhoto);
 
 
+
 // function showInputError(form, popupInput, errorMessage) {
 //     const errorPopup = form.querySelector(`.${popupInput.id}-error`)
 //     popupInput.classList.add("popup__input-error");
@@ -239,14 +240,14 @@ popupPhotoCloseBtn.addEventListener("click", closePopupPhoto);
 
 
 
-// const object = {
+// enableValidation ({
 //     formSelector: ".form",
 //     inputSelector: ".popup__input",
 //     submitBtnSelector: ".popup__submit",
 //     offBtnSelector: ".popup__submit_inactive",
 //     inputErrorClass: ".popup__input-error",
 //     errorClass: ".popup__input-error_active"
-// }
+// })
 
-// enableValidation(object);
+
 

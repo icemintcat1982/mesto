@@ -66,7 +66,7 @@ function enableValidation(object) {
 
 
 enableValidation({
-    formSelector: ".form",
+    formSelector: ".popup__form",
     inputSelector: ".popup__input",
     submitBtnSelector: ".popup__submit",
     offBtnSelector: ".popup__submit_inactive",
