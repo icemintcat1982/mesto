@@ -1,10 +1,81 @@
-// enableValidation ({
-//     formSelector: ".popup__form",
-//     inputSelector: ".popup__input",
-//     submitBtnSelector: ".popup__submit",
-//     offBtnSelector: ".popup__submit_disabled",
-//     inputErrorClass: ".popup__input-error",
-//     errorClass: "popup__error_visible"
-// })
+
+
+function showInputError(object, form, input, errorMessage) {
+    const error = form.querySelector(`.${input.id}-error`)
+    input.classList.add(object.inputErrorClass);
+    error.textContent = errorMessage;
+    error.classList.add(object.errorClass);
+
+    
+}
+
+function hideInputError(object, form, input) {
+    const error = form.querySelector(`.${input.id}-error`)
+    input.classList.remove(object.inputErrorClass);
+    error.classList.remove(object.errorClass);
+    error.textContent = "";
+    
+}
+
+
+function isValid(object, form, input) {
+    if (!input.validity.valid) {
+        showInputError(object, form, input, input.validationMessage);
+    } else {
+        hideInputError(object, form, input);
+    };
+}
+
+
+function hasInvalidInput(object, input) {
+    return inputList.some((input) => {
+        return !input.validity.valid;
+    })
+}
+
+function toggleBtnState(object, inputList, submitBtn ) {
+    if (hasInvalidInput(inputList)) {
+        submitBtn.classList.add(object.offBtn);
+        submitBtn.disabled = true;
+    } else {
+        submitBtn.classList.remove(object.offBtn);
+       submitBtn.disabled = false;
+    };
+}
+
+
+
+const setEventListener = (object, form) => {
+    const inputList = Array.from(form.querySelectorAll(input));
+    const submitBtn = form.querySelector(submitBtn);
+    inputList.forEach((input) => {
+       input.addEventListener("input", () => {
+        isValid(object, form, input);
+        toggleBtnState(inputList, submitBtn);
+       }) ;      
+    });
+}
+
+
+const enableValidation = () => {
+    const {formSelector, inputSelector, submitBtnSelector, offBtnSelector, inputErrorClass, errorClass} = object;
+    const popupList = Array.from(document.querySelectorAll(object.form));
+    popupList.forEach((form) => {
+        setEventListener(form);
+    });
+}
+
+
+
+const object = {
+    formSelector: ".form",
+    inputSelector: ".popup__input",
+    submitBtnSelector: ".popup__submit",
+    offBtnSelector: ".popup__submit_inactive",
+    inputErrorClass: ".popup__input-error",
+    errorClass: ".popup__input-error_active"
+}
+
+enableValidation(object);
 
 

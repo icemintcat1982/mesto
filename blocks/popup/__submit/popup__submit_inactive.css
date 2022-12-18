@@ -2,7 +2,10 @@
     background: #FFFFFF;
     color: #000000;
     border: 1px solid #000000;
-    cursor: none;
+    cursor: default;
     opacity: 0.2;
 }
 
+.popup__submit_.popup__submit_inactive {
+    cursor: default;
+}
