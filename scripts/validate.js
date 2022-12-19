@@ -1,5 +1,4 @@
 function isValid(config, form, input) {
-    console.log("input", input.value);
     if (!input.validity.valid) {
         showInputError(config, form, input, input.validationMessage);
     } else {
