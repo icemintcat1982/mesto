@@ -103,16 +103,29 @@ function addCardSubmit(evt) {
 
 popupCard.addEventListener("submit", addCardSubmit);
 
+// function cleanErrorPopup() {
+//     popup.getElementById("name-input-error").reset();
+//     popup.getElementById("discription-input-error").reset();
+//     popup.getElementById("place-input-error").reset();
+//     popup.getElementById("link-input-error").reset();
+// }
+
 function openPopup(popup) {
     popup.classList.add(POPUP_ACTIVE_CLASS);
     document.addEventListener("keyup", closePopupEsc);
     popup.addEventListener("click", closePopupOverlay);
+  
 }
+
+
+
 
 function openPopupProfile(evt) {
     nameInput.value = profileNameEdit.textContent;
     decriptionInput.value = profileDescriptionEdit.textContent;
     openPopup(popupProfile, evt);
+    // cleanErrorPopup(popupProfile);
+
 }
 
 btnOpenPopup.addEventListener("click", openPopupProfile);
@@ -121,16 +134,17 @@ function handleSubmitProfileForm(evt) {
     evt.preventDefault();
     profileNameEdit.textContent = nameInput.value;
     profileDescriptionEdit.textContent = decriptionInput.value;
-    closePopup(popupProfile);
 }
 
 form.addEventListener("submit", handleSubmitProfileForm);
 
 function openPopupCard(evt) {
     openPopup(popupCard, evt);
+    // cleanErrorPopup(popupCard);
 }
 
 popupAddCardOpen.addEventListener("click", openPopupCard);
+
 
 function closePopup(popup) {
     popup.classList.remove(POPUP_ACTIVE_CLASS);
