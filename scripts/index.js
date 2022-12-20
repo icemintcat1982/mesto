@@ -99,24 +99,23 @@ function addCardSubmit(evt) {
     placeInput.value = "";
     linkInput.value = "";
     closePopup(popupCard);
+
+    evt.submitter.disabled = true;
+    evt.submitter.classList.add("popup__submit_inactive");
 }
 
 popupCard.addEventListener("submit", addCardSubmit);
-
 
 function openPopup(popup) {
     popup.classList.add(POPUP_ACTIVE_CLASS);
     document.addEventListener("keyup", closePopupEsc);
     popup.addEventListener("click", closePopupOverlay);
-  
 }
-
 
 function openPopupProfile(evt) {
     nameInput.value = profileNameEdit.textContent;
     decriptionInput.value = profileDescriptionEdit.textContent;
     openPopup(popupProfile, evt);
-
 }
 
 btnOpenPopup.addEventListener("click", openPopupProfile);
@@ -135,7 +134,6 @@ function openPopupCard(evt) {
 }
 
 popupAddCardOpen.addEventListener("click", openPopupCard);
-
 
 function closePopup(popup) {
     popup.classList.remove(POPUP_ACTIVE_CLASS);
