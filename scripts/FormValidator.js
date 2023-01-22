@@ -47,6 +47,16 @@ _toggleBtnState() {
     }
 }
 
+
+resetValidation() {
+    this._toggleBtnState();
+
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement) 
+    });
+
+  }
+
 _setEventListener() {
   this._toggleBtnState();
   this._inputList.forEach((inputElement) => {
@@ -56,6 +66,8 @@ _setEventListener() {
 });
 });
 }
+
+
 
 enableValidation() {
    this._setEventListener();
