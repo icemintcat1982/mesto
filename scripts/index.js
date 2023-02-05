@@ -73,30 +73,35 @@ const initialCards = [
 //     openPopup(popupPhoto);
 // };
 
-const popupWithForm = new PopupWithForm({popupSelector:".popup__add_card", handleCardSubmit: () => {
+function handleCardSubmit(inputValues) {
 const newPlaceName = inputTextCard.value;
 const newPlaceLink = inputLinkCard.value;
-
+//заменить переменные!!!
 cardList.prepend (createCard({
-   name: newPlaceName,
-   link: newPlaceLink, 
-}));
-popupWithForm.close();
-validationCard.resetValidation();
-}});    
-popupWithForm.setEventListeners();
-
-const popupWithProfile = new PopupWithForm({popupSelector: ".popup__edit-form", handleCardSubmit: (text) => {
-
-}})
-
+   name: inputValues.place,
+   link: inputValues.link, 
+}))
+}
 
 const popupWithImage = new PopupWithImage(".popup_photo_open");
 popupWithImage.setEventListeners();
 const handleCardClick = (name, link) => {
     popupWithImage.open(name, link);
 };
-3
+
+const popupWithForm = new PopupWithForm(".popup__form", handleCardSubmit);
+
+popupWithForm.close();
+validationCard.resetValidation();
+    
+popupWithForm.setEventListeners();
+
+// const popupWithProfile = new PopupWithForm({popupSelector: ".popup__edit-form", handleCardSubmit: (text) => {
+
+// }})
+
+
+
 
 
 function createCard(item) {
