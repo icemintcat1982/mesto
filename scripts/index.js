@@ -3,7 +3,7 @@ import {FormValidator} from "./FormValidator.js";
 import {config} from "./validate.js";
 import {Section} from "./Section.js";
 import {PopupWithImage} from "./PopupWithImage.js";
-import { PopupWithForm } from "./PopupWithForm.js";
+import {PopupWithForm } from "./PopupWithForm.js";
 
 
 const POPUP_ACTIVE_CLASS = "popup_active";
@@ -86,9 +86,9 @@ validationCard.resetValidation();
 }});    
 popupWithForm.setEventListeners();
 
-// const popupWithProfile = new PopupWithForm({popupSelector, ".popup__edit-form", handleCardSubmit: (text) => {
+const popupWithProfile = new PopupWithForm({popupSelector: ".popup__edit-form", handleCardSubmit: (text) => {
 
-// }})
+}})
 
 
 const popupWithImage = new PopupWithImage(".popup_photo_open");

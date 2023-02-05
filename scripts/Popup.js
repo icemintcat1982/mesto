@@ -4,6 +4,7 @@ constructor(popupSelector) {
     this._popupCloseBtn = this._popupElement.querySelector('.popup__close');
 }
 
+
 open() {
 this._popupElement.classList.add('popup_active');
 document.addEventListener("keyup", (evt) => {this._handleEscClose(evt)}
