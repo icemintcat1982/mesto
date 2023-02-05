@@ -1,6 +1,10 @@
 import {Card} from "./Card.js";
 import {FormValidator} from "./FormValidator.js";
 import {config} from "./validate.js";
+import {Section} from "./Section.js";
+import {PopupWithImage} from "./PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
+
 
 const POPUP_ACTIVE_CLASS = "popup_active";
 
@@ -59,12 +63,40 @@ const initialCards = [
 
 
 
-function handleCardClick(name, link) {
-    contentPhoto.src = link;
-    captionPhoto.textContent = name;
-    contentPhoto.alt = name;
-    openPopup(popupPhoto);
+
+
+
+// function handleCardClick(name, link) {
+//     contentPhoto.src = link;
+//     captionPhoto.textContent = name;
+//     contentPhoto.alt = name;
+//     openPopup(popupPhoto);
+// };
+
+const popupWithForm = new PopupWithForm({popupSelector:".popup__add_card", handleCardSubmit: () => {
+const newPlaceName = inputTextCard.value;
+const newPlaceLink = inputLinkCard.value;
+
+cardList.prepend (createCard({
+   name: newPlaceName,
+   link: newPlaceLink, 
+}));
+popupWithForm.close();
+validationCard.resetValidation();
+}});    
+popupWithForm.setEventListeners();
+
+// const popupWithProfile = new PopupWithForm({popupSelector, ".popup__edit-form", handleCardSubmit: (text) => {
+
+// }})
+
+
+const popupWithImage = new PopupWithImage(".popup_photo_open");
+popupWithImage.setEventListeners();
+const handleCardClick = (name, link) => {
+    popupWithImage.open(name, link);
 };
+3
 
 
 function createCard(item) {
@@ -77,6 +109,13 @@ initialCards.forEach((item) => {
 
     cardElements.append(createCard(item));
 
+});
+
+const cardList = new Section({
+    items: initialCards,
+    renderer:(item) => {
+        cardList.addItem(createCard(item))
+    }
 });
 
 function addCardSubmit(evt) {
@@ -94,11 +133,14 @@ function addCardSubmit(evt) {
 }
 
 
+
 const validationProfile = new FormValidator(config, popupProfile);
 validationProfile.enableValidation();
 
 const validationCard = new FormValidator(config, popupCard);
 validationCard.enableValidation();
+
+
 
 popupCard.addEventListener("submit", addCardSubmit);
 
