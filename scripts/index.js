@@ -73,28 +73,20 @@ const initialCards = [
 //     openPopup(popupPhoto);
 // };
 
-function handleCardSubmit(inputValues) {
-const newPlaceName = inputTextCard.value;
-const newPlaceLink = inputLinkCard.value;
-//заменить переменные!!!
-cardList.prepend (createCard({
-   name: inputValues.place,
-   link: inputValues.link, 
-}))
-}
 
-const popupWithImage = new PopupWithImage(".popup_photo_open");
+
+const popupWithImage = new PopupWithImage();
 popupWithImage.setEventListeners();
 const handleCardClick = (name, link) => {
     popupWithImage.open(name, link);
 };
 
-const popupWithForm = new PopupWithForm(".popup__form", handleCardSubmit);
+const popupWithCard = new PopupWithForm({popupSelector: ".popup__add_card", handleCardSubmit: (card) => {
+    cardList.addItem(createCard(card));
+    popupWithCard.close()
+}});
 
-popupWithForm.close();
-validationCard.resetValidation();
-    
-popupWithForm.setEventListeners();
+popupWithCard.setEventListeners();
 
 // const popupWithProfile = new PopupWithForm({popupSelector: ".popup__edit-form", handleCardSubmit: (text) => {
 
