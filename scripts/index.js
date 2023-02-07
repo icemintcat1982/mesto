@@ -62,11 +62,6 @@ const initialCards = [
     },
 ];
 
-
-
-
-
-
 // function handleCardClick(name, link) {
 //     contentPhoto.src = link;
 //     captionPhoto.textContent = name;
@@ -76,15 +71,11 @@ const initialCards = [
 
 const user = new UserInfo({nameSelector: ".name", descriptionSelector: ".description"});
 
-
-
 const popupWithImage = new PopupWithImage(".popup_photo_open");
 popupWithImage.setEventListeners();
 const handleCardClick = (name, link) => {
     popupWithImage.open(name, link);
 };
-
-
 
 const popupWithCard = new PopupWithForm({ popupSelector: ".popup__add-card", handleCardSubmit: (card) => {
     cardList.addItem(createCard(card));
@@ -92,8 +83,8 @@ const popupWithCard = new PopupWithForm({ popupSelector: ".popup__add-card", han
 }})
 popupWithCard.setEventListeners();
 
-const popupWithProfile = new PopupWithForm({popupSelector: ".popup__edit-form", handleSubmitProfileForm: (text) => {
-user.setUserInfo(text)
+const popupWithProfile = new PopupWithForm({popupSelector: ".popup__edit-form", handleCardSubmit: (description) => {
+user.setUserInfo(description)
 popupWithProfile.close();
 }})
 popupWithProfile.setEventListeners();
@@ -119,26 +110,27 @@ initialCards.forEach((item) => {
 
 });
 
+
 const cardList = new Section({
     items: initialCards,
     renderer:(item) => {
-        cardList.addItem(createCard(item))
-    }
-});
+        cardList.setItem(createCard(item))
+    }}, ".element");
 
-function addCardSubmit(evt) {
-    evt.preventDefault();
-    const newPlaceName = placeInput.value;
-    const newPlaceLink = linkInput.value;
 
-    cardElements.prepend(createCard({
-        name: newPlaceName,
-        link: newPlaceLink
-    }));
+// function addCardSubmit(evt) {
+//     evt.preventDefault();
+//     const newPlaceName = placeInput.value;
+//     const newPlaceLink = linkInput.value;
+
+//     cardElements.prepend(createCard({
+//         name: newPlaceName,
+//         link: newPlaceLink
+//     }));
  
-    closePopup(popupCard);
+//     closePopup(popupCard);
 
-}
+// }
 
 
 
@@ -150,7 +142,7 @@ validationCard.enableValidation();
 
 
 
-popupCard.addEventListener("submit", addCardSubmit);
+// popupCard.addEventListener("submit", addCardSubmit);
 
 
 function openPopup(popup) {
