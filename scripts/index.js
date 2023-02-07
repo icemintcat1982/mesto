@@ -4,6 +4,7 @@ import {config} from "./validate.js";
 import {Section} from "./Section.js";
 import {PopupWithImage} from "./PopupWithImage.js";
 import {PopupWithForm } from "./PopupWithForm.js";
+import {UserInfo} from "./UserInfo.js";
 
 
 const POPUP_ACTIVE_CLASS = "popup_active";
@@ -73,27 +74,37 @@ const initialCards = [
 //     openPopup(popupPhoto);
 // };
 
+const user = new UserInfo({nameSelector: ".name", descriptionSelector: ".description"});
 
 
-const popupWithImage = new PopupWithImage();
+
+const popupWithImage = new PopupWithImage(".popup_photo_open");
 popupWithImage.setEventListeners();
 const handleCardClick = (name, link) => {
     popupWithImage.open(name, link);
 };
 
-const popupWithCard = new PopupWithForm({popupSelector: ".popup__add_card", handleCardSubmit: (card) => {
-    cardList.addItem(createCard(card));
-    popupWithCard.close()
-}});
 
+
+const popupWithCard = new PopupWithForm({ popupSelector: ".popup__add-card", handleCardSubmit: (card) => {
+    cardList.addItem(createCard(card));
+    popupWithCard.close();
+}})
 popupWithCard.setEventListeners();
 
-// const popupWithProfile = new PopupWithForm({popupSelector: ".popup__edit-form", handleCardSubmit: (text) => {
+const popupWithProfile = new PopupWithForm({popupSelector: ".popup__edit-form", handleSubmitProfileForm: (text) => {
+user.setUserInfo(text)
+popupWithProfile.close();
+}})
+popupWithProfile.setEventListeners();
 
-// }})
 
-
-
+// function handleSubmitProfileForm(evt) {
+//     evt.preventDefault();
+//     profileNameEdit.textContent = nameInput.value;
+//     profileDescriptionEdit.textContent = decriptionInput.value;
+//     closePopup(popupProfile);
+// }
 
 
 function createCard(item) {
