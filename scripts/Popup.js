@@ -27,7 +27,7 @@ _handleEscClose = (evt) => {
 setEventListeners() {
     this._popupElement.addEventListener("click", (evt) => {
         if (evt.target.classList.contains('popup_active')) {
-            this._close()}});
+            this.close()}});
     this._popupCloseBtn.addEventListener("click", () => {
         this.close();
     })

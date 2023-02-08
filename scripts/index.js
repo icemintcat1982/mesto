@@ -69,7 +69,7 @@ const initialCards = [
 //     openPopup(popupPhoto);
 // };
 
-const user = new UserInfo({nameSelector: ".name", descriptionSelector: ".description"});
+const user = new UserInfo({nameSelector: ".profile__name", descriptionSelector: ".profile__description"});
 
 const popupWithImage = new PopupWithImage(".popup_photo_open");
 popupWithImage.setEventListeners();
@@ -146,38 +146,50 @@ validationCard.enableValidation();
 // popupCard.addEventListener("submit", addCardSubmit);
 
 
-function openPopup(popup) {
+// function openPopup(popup) {
     
-    popup.classList.add(POPUP_ACTIVE_CLASS);
-    document.addEventListener("keyup", closePopupEsc);
-    popup.addEventListener("click", closePopupOverlay);
-}
+//     popup.classList.add(POPUP_ACTIVE_CLASS);
+//     document.addEventListener("keyup", closePopupEsc);
+//     popup.addEventListener("click", closePopupOverlay);
+// }
 
-function openPopupProfile(evt) {
-    validationProfile.resetValidation()
-    nameInput.value = profileNameEdit.textContent;
-    decriptionInput.value = profileDescriptionEdit.textContent;
-    openPopup(popupProfile, evt);
-}
+// function openPopupProfile(evt) {
+//     validationProfile.resetValidation()
+//     nameInput.value = profileNameEdit.textContent;
+//     decriptionInput.value = profileDescriptionEdit.textContent;
+//     openPopup(popupProfile, evt);
+// }
 
-btnOpenPopup.addEventListener("click", openPopupProfile);
+btnOpenPopup.addEventListener("click", () => {
+validationProfile.resetValidation();
+popupWithProfile.open();
+const {name, description} = user.getUserInfo();
+nameInput.value = name;
+decriptionInput.value = description;
+})
 
 
-function handleSubmitProfileForm(evt) {
-    evt.preventDefault();
-    profileNameEdit.textContent = nameInput.value;
-    profileDescriptionEdit.textContent = decriptionInput.value;
-    closePopup(popupProfile);
-}
-
-formProfile.addEventListener("submit", handleSubmitProfileForm);
-
-function openPopupCard(evt) {
+popupAddCardOpen.addEventListener("click", () => {
     validationCard.resetValidation();
-    openPopup(popupCard, evt);
-}
+    popupWithCard.open();
+});
 
-popupAddCardOpen.addEventListener("click", openPopupCard);
+
+// function handleSubmitProfileForm(evt) {
+//     evt.preventDefault();
+//     profileNameEdit.textContent = nameInput.value;
+//     profileDescriptionEdit.textContent = decriptionInput.value;
+//     closePopup(popupProfile);
+// }
+
+// formProfile.addEventListener("submit", handleSubmitProfileForm);
+
+// function openPopupCard(evt) {
+//     validationCard.resetValidation();
+//     openPopup(popupCard, evt);
+// }
+
+
 
 function closePopup(popup) {
     popup.classList.remove(POPUP_ACTIVE_CLASS);
