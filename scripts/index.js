@@ -114,8 +114,9 @@ initialCards.forEach((item) => {
 const cardList = new Section({
     items: initialCards,
     renderer:(item) => {
-        cardList.setItem(createCard(item))
-    }}, ".element");
+        cardList.addItem(createCard(item))
+    }}, ".elements");
+    cardList.renderItems();
 
 
 // function addCardSubmit(evt) {

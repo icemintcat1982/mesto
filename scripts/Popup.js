@@ -29,7 +29,7 @@ setEventListeners() {
         if (evt.target.classList.contains('popup_active')) {
             this._close()}});
     this._popupCloseBtn.addEventListener("click", () => {
-        this._close();
+        this.close();
     })
 }
 
