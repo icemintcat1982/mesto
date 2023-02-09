@@ -7,14 +7,12 @@ constructor(popupSelector) {
 
 open() {
 this._popupElement.classList.add('popup_active');
-document.addEventListener("keyup", (evt) => {this._handleEscClose(evt)}
-);
+document.addEventListener("keyup", this._handleEscClose);
 }
 
 close() {
     this._popupElement.classList.remove('popup_active');
-    document.removeEventListener("keyup", (evt) => {this._handleEscClose(evt)}
-     );
+    document.removeEventListener("keyup", this._handleEscClose);
 }
 
 _handleEscClose = (evt) => {
@@ -27,7 +25,8 @@ _handleEscClose = (evt) => {
 setEventListeners() {
     this._popupElement.addEventListener("click", (evt) => {
         if (evt.target.classList.contains('popup_active')) {
-            this.close()}});
+            this.close();
+        }})
     this._popupCloseBtn.addEventListener("click", () => {
         this.close();
     })

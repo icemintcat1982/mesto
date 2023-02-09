@@ -20,6 +20,7 @@ setEventListeners() {
     this._form.addEventListener("submit", (event) => {
         event.preventDefault();
         this._handleCardSubmit(this._getInputValues());
+        this.close();
     });
 }
 
