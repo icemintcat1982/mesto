@@ -4,15 +4,15 @@
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="./pages/index.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script defer src="./scripts/index.js" type="module"></script>
+        <script defer src="./pages/index.js" type="module"></script>
         <script defer src="./scripts/validate.js" type="module"></script>
-        <script defer src="./scripts/card.js" type="module"></script>
-        <script defer src="./scripts/FormValidator.js" type="module"></script>
+        <script defer src="./components/Card.js" type="module"></script>
+        <script defer src="./components/FormValidator.js" type="module"></script>
         <title>Место</title>
     </head>
 
     <body class="page">
-        <header class="header">
+        <header class="header"> 
             <img
                 class="logo logo_place_header"
                 src="./images/header_img1.png"
@@ -112,7 +112,7 @@
                         <input
                             id="place-input"
                             class="popup__input popup__input_place"
-                            name="place"
+                            name="name"
                             type="text"
                             placeholder="Название"
                             required
