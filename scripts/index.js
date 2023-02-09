@@ -77,8 +77,9 @@ const handleCardClick = (name, link) => {
     popupWithImage.open(name, link);
 };
 
-const popupWithCard = new PopupWithForm({ popupSelector: ".popup_card-submit", handleCardSubmit: (card) => {
+const popupWithCard = new PopupWithForm({ popupSelector: ".popup_card_submit", handleCardSubmit: (card) => {
     cardList.addItem(createCard(card));
+    console.log('card =>', card)
     // popupWithCard.close();
 }})
 popupWithCard.setEventListeners();
@@ -191,11 +192,12 @@ function openPopupCard() {
 
 popupAddCardOpen.addEventListener("click", openPopupCard);
 
-function closePopup(popup) {
-    popup.classList.remove(POPUP_ACTIVE_CLASS);
-    document.removeEventListener("keyup", closePopupEsc);
-    popup.removeEventListener("click", closePopupOverlay);
-}
+
+// function closePopup(popup) {
+//     popup.classList.remove(POPUP_ACTIVE_CLASS);
+//     document.removeEventListener("keyup", closePopupEsc);
+//     popup.removeEventListener("click", closePopupOverlay);
+// }
 
 // function closePopupEsc(evt) {
 //     if (evt.key === "Escape") {

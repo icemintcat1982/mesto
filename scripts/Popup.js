@@ -8,7 +8,7 @@ constructor(popupSelector) {
 open() {
 this._popupElement.classList.add('popup_active');
 document.addEventListener("keyup", this._handleEscClose);
-}
+}3
 
 close() {
     this._popupElement.classList.remove('popup_active');
