@@ -2,7 +2,6 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" href="./pages/index.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script defer src="./pages/index.js" type="module"></script>
         <script defer src="./scripts/validate.js" type="module"></script>
@@ -15,7 +14,7 @@
         <header class="header"> 
             <img
                 class="logo logo_place_header"
-                src="./images/header_img1.png"
+                src="<%=require('./images/header_img1.png')%>"
                 alt="Место"
             />
         </header>
@@ -24,7 +23,7 @@
             <section class="profile">
                 <img
                     class="profile__avatar"
-                    src="./images/cousteau.jpg"
+                    src="<%=require('./images/cousteau.jpg')%>"
                     alt="Кусто"
                 />
                 <div class="profile__info">
