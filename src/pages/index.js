@@ -5,7 +5,9 @@ import {Section} from "../components/Section.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm } from "../components/PopupWithForm.js";
 import {UserInfo} from "../components/UserInfo.js";
+import {Api} from "../components/Api.js";
 import "./index.css";
+
 
 
 const btnOpenPopup = document.querySelector(".profile__button_type_edit");
@@ -14,6 +16,7 @@ const popupProfile = document.querySelector(".popup_profile_submit");
 const popupCard = document.querySelector(".popup_card_submit");
 const nameInput = document.querySelector(".popup__input_name");
 const decriptionInput = document.querySelector(".popup__input_description");
+let userId;
 
 const initialCards = [
     {
@@ -42,6 +45,22 @@ const initialCards = [
     },
 ];
 
+const api = new Api({
+    url: 'https://mesto.nomoreparties.co/v1/cohort-59',
+    headers: {
+        authorization: '1f1b2dd2-b429-4573-aa4a-55a60a7ac94d',
+        'Content-Type': 'application/json'
+    }
+});
+
+api.getUserInfo()
+.then((res) => user.setUserInfo(res));
+
+api.getCards()
+.then((res) => {console.log(res),
+cardList.renderItems(res)});
+
+
 
 const user = new UserInfo({nameSelector: ".profile__name", descriptionSelector: ".profile__description"});
 
@@ -63,9 +82,24 @@ popupWithProfile.setEventListeners();
 
 
 
+function likeCard(card, id) {
+    if (card.isLiked()) {
+        api.likeCard(id)
+        .then(res => {
+            card.handleCardLike(res)
+        })
+    }
+    else {
+        api.dislikeCard(id)
+        .then(res => {
+            card.handleCardLike(res)
+        })
+    }
+}
+
 
 function createCard(item) {
-    const card = new Card(item.name, item.link, "#element__card", handleCardClick);
+    const card = new Card(item, "#element__card", handleCardClick, likeCard);
     const newCard = card.generateCard();
     return newCard;
 }
@@ -74,11 +108,10 @@ function createCard(item) {
 
 
 const cardList = new Section({
-    items: initialCards,
     renderer:(item) => {
         cardList.addItem(createCard(item))
     }}, ".elements");
-    cardList.renderItems();
+
 
 
 
