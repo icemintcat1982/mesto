@@ -55,7 +55,7 @@ isLiked() {
 
 _isDeleteCard() {
     if (!(this._owner === this._userId)) {
-        this._element.querySelector(".element__delete").remove;
+        this._element.querySelector(".element__delete").remove();
     } 
 }
 
@@ -63,7 +63,6 @@ handleCardLike(likes) {
   this._likes = likes;
   this._buttonLike.classList.toggle("element__button_active");
   this._totalLikes.textContent = this._likes.length;
-console.log(likes);
 }
 
 _handleCardDelete() {
