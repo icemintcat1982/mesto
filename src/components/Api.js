@@ -81,9 +81,13 @@ changeUserAvatar(data) {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-            avatar: data.userAvatar,
+            avatar: data.avatar,
           })
     })
     .then(this._checkResult)
+}
+
+getAllData() {
+    return Promise.all([this.getUserInfo(), this.getCards()])
 }
 }

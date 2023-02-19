@@ -6,7 +6,7 @@ constructor(data, templateSelector, handleCardClick, userId, likeCard) {
     this._likes = data.likes;
     this._likeCard = likeCard;
     this._id = data._id;
-    this._owner = data.owner;
+    this._owner = data.owner._id;
     this._userId = userId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -54,7 +54,7 @@ isLiked() {
 }
 
 _isDeleteCard() {
-    if (this._owner === this._userId) {
+    if (!(this._owner === this._userId)) {
         this._element.querySelector(".element__delete").remove;
     } 
 }

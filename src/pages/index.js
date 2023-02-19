@@ -16,6 +16,7 @@ const popupProfile = document.querySelector(".popup_profile_submit");
 const popupCard = document.querySelector(".popup_card_submit");
 const nameInput = document.querySelector(".popup__input_name");
 const decriptionInput = document.querySelector(".popup__input_description");
+const popupEditAvatarBtn = document.querySelector(".profile__button_type_add");
 let userId;
 
 const initialCards = [
@@ -65,7 +66,7 @@ cardList.renderItems(res)});
 
 
 
-const user = new UserInfo({nameSelector: ".profile__name", descriptionSelector: ".profile__description"});
+const user = new UserInfo({nameSelector: ".profile__name", descriptionSelector: ".profile__description", avatarSelector: ".profile__avatar"});
 
 const popupWithImage = new PopupWithImage(".popup_photo_open");
 popupWithImage.setEventListeners();
@@ -82,6 +83,21 @@ const popupWithProfile = new PopupWithForm({popupSelector: ".popup_profile_submi
 user.setUserInfo(description)
 }})
 popupWithProfile.setEventListeners();
+
+const editAvatar = fieldObj => {
+    api.changeUserAvatar(fieldObj)
+    .then(() => {
+        user.setUserAvatar(fieldObj);
+        popupWithAvatar.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+    });
+}
+
+const popupWithAvatar = new PopupWithForm({popupSelector: ".popup_avatar-edit", handleCardSubmit: fieldObj => { editAvatar(fieldObj);
+}});
+popupWithAvatar.setEventListeners();
 
 
 
@@ -108,16 +124,10 @@ function createCard(item) {
 }
 
 
-
-
 const cardList = new Section({
     renderer:(item) => {
         cardList.addItem(createCard(item))
     }}, ".elements");
-
-
-
-
 
 
 const validationProfile = new FormValidator(config, popupProfile);
@@ -150,4 +160,6 @@ function openPopupCard() {
 }
 
 popupAddCardOpen.addEventListener("click", openPopupCard);
+
+
 
