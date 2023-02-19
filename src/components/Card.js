@@ -26,9 +26,8 @@ generateCard() {
     this._element.querySelector(".element__image").src = this._link;
     this._element.querySelector(".element__image").alt = this._name;
     this._totalLikes = this._element.querySelector(".element__like-counter");
-    // this._totalLikes.textContent = this._likes.length;
-
-    this.isLiked();
+    
+    this._isDeleteCard();
 
     return this._element;
 }
@@ -54,12 +53,19 @@ isLiked() {
   return userLike;
 }
 
+_isDeleteCard() {
+    if (this._ownerId === this._userId) {
+        this._element.querySelector(".element__delete").style.visibility = "visible";
+    } else {
+        this._element.querySelector(".element__delete").style.visibility = "hidden";
+    }
+}
 
 handleCardLike(likes) {
   this._likes = likes;
   this._buttonLike.classList.toggle("element__button_active");
   this._totalLikes.textContent = this._likes.length;
-
+console.log(likes);
 }
 
 _handleCardDelete() {

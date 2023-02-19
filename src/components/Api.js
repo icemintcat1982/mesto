@@ -67,4 +67,23 @@ dislikeCard(id) {
     })
     .then(this._checkResult)
 }
+
+deleteCard(id) {
+    return fetch(this._url + `/cards/${id}`, {
+        method: 'DELETE',
+        headers: this._headers
+    })
+    .then(this._checkResult)
+}
+
+changeUserAvatar(data) {
+    return fetch(this._url + `/users/me/avatar`, {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+            avatar: data.userAvatar,
+          })
+    })
+    .then(this._checkResult)
+}
 }

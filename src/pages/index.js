@@ -89,13 +89,13 @@ function likeCard(card, id) {
     if (card.isLiked()) {
         api.dislikeCard(id)
         .then(res => {
-            card.handleCardLike(res)
+            card.handleCardLike(res.likes)
         })
     }
     else {
         api.likeCard(id)
         .then(res => {
-            card.handleCardLike(res)
+            card.handleCardLike(res.likes)
         })
     }
 }
