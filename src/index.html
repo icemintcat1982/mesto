@@ -26,6 +26,7 @@
                     src="<%=require('./images/cousteau.jpg')%>"
                     alt="Кусто"
                 />
+                <button class="profile__button_avatar" type="button"></button>
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button
@@ -93,6 +94,31 @@
                 </form>
             </div>
         </section>
+
+        <section class="popup popup_avatar-edit">
+            <div class="popup__edit-avatar popup__content">
+                <form class="popup__form" name="avater_edit" novalidate>
+                    <h2 class="popup__title">Обновить аватар</h2>
+                    <input id="avatar-edit" class="popup__input popup__input_description" name="avatar" type="url" placeholder="Ссылка на картинку" required>
+                    <span class="popup__input-error" id="decription-input-error">
+                    </span>
+                    <button class="popup__submit" type="submit">Сохранить</button>
+                </form>
+                <button class="popup__close" type="button"></button>
+            </div>
+        </section>
+
+
+<section class="popup popup_agree-delete">
+    <div class="popup__delete-confirm popup__content">
+        <form class="popup__form" name="card_delete" novalidate>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="popup__submit" type="submit">Да</button>
+        </form>
+        <button class="popup__close" type="button"></button>
+    </div>
+</section>
+
 
         <section class="popup popup_card_submit">
             <div class="popup__add-card popup__content">
