@@ -5,7 +5,7 @@ constructor(data, templateSelector, handleCardClick, userId, likeCard) {
     this._link = data.link;
     this._likes = data.likes;
     this._likeCard = likeCard;
-    this._id = data.id;
+    this._id = data._id;
     this._ownerId = data.ownerId;
     this._userId = userId;
     this._templateSelector = templateSelector;
@@ -28,7 +28,7 @@ generateCard() {
     this._totalLikes = this._element.querySelector(".element__like-counter");
     // this._totalLikes.textContent = this._likes.length;
 
-    this._isLiked();
+    this.isLiked();
 
     return this._element;
 }
@@ -37,8 +37,7 @@ _setEventListeners() {
 this._buttonLike = this._element.querySelector(".element__button");
 
 this._buttonLike.addEventListener('click', () => {
-this._handleCardLike();
-// this._likeCard();
+this._likeCard(this, this._id);
   });
 
 this._element.querySelector(".element__delete").addEventListener("click", () => {
@@ -50,15 +49,16 @@ this._element.querySelector(".element__image").addEventListener("click", () => {
 }
 
 
-_isLiked() {
+isLiked() {
   const userLike = this._likes.some(like => like._id === this._userId);
   return userLike;
 }
 
 
-_handleCardLike() {
-this._buttonLike.classList.toggle("element__button_active");
-this._totalLikes.textContent = this._likes.length;
+handleCardLike(likes) {
+  this._likes = likes;
+  this._buttonLike.classList.toggle("element__button_active");
+  this._totalLikes.textContent = this._likes.length;
 
 }
 

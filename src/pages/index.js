@@ -54,7 +54,10 @@ const api = new Api({
 });
 
 api.getUserInfo()
-.then((res) => user.setUserInfo(res));
+.then((res) => {user.setUserInfo(res);
+    userId = res._id;
+    console.log(userId);
+});
 
 api.getCards()
 .then((res) => {console.log(res),
@@ -84,13 +87,13 @@ popupWithProfile.setEventListeners();
 
 function likeCard(card, id) {
     if (card.isLiked()) {
-        api.likeCard(id)
+        api.dislikeCard(id)
         .then(res => {
             card.handleCardLike(res)
         })
     }
     else {
-        api.dislikeCard(id)
+        api.likeCard(id)
         .then(res => {
             card.handleCardLike(res)
         })
@@ -99,7 +102,7 @@ function likeCard(card, id) {
 
 
 function createCard(item) {
-    const card = new Card(item, "#element__card", handleCardClick, likeCard);
+    const card = new Card(item, "#element__card", handleCardClick, userId, likeCard);
     const newCard = card.generateCard();
     return newCard;
 }
