@@ -99,7 +99,9 @@ const popupWithAvatar = new PopupWithForm({popupSelector: ".popup_avatar-edit", 
 }});
 popupWithAvatar.setEventListeners();
 
-
+popupEditAvatarBtn.addEventListener("click", () => {
+    popupWithAvatar.open();
+})
 
 function likeCard(card, id) {
     if (card.isLiked()) {

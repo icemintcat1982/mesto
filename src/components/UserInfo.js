@@ -25,8 +25,8 @@ export class UserInfo {
         return this._id;
     }
 
-    setUserAvatar() {
-        this._avatar.src = obj.avatar;
+    setUserAvatar(data) {
+        this._avatar.src = data.avatar;
     }
 
 }
