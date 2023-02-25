@@ -1,5 +1,5 @@
 export class Card {
-constructor(data, templateSelector, handleCardClick, userId, likeCard) {
+constructor(data, templateSelector, handleCardClick, userId, likeCard, handleDeleteClick) {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
@@ -10,6 +10,8 @@ constructor(data, templateSelector, handleCardClick, userId, likeCard) {
     this._userId = userId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+
  
 }
 
@@ -26,9 +28,7 @@ generateCard() {
     this._element.querySelector(".element__image").src = this._link;
     this._element.querySelector(".element__image").alt = this._name;
     this._totalLikes = this._element.querySelector(".element__like-counter");
-    
     this._isDeleteCard();
-    console.log(this._ownerId);
     return this._element;
 
 }
@@ -41,7 +41,7 @@ this._likeCard(this, this._id);
   });
 
 this._element.querySelector(".element__delete").addEventListener("click", () => {
-    this._handleCardDelete();
+    this._handleDeleteClick();
 });
 this._element.querySelector(".element__image").addEventListener("click", () => {
     this._handleCardClick(this._name, this._link);
@@ -66,7 +66,7 @@ handleCardLike(likes) {
   this._totalLikes.textContent = this._likes.length;
 }
 
-_handleCardDelete() {
+handleCardDelete() {
 this._element.remove();
 this._element = null;
 }

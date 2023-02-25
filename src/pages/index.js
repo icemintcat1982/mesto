@@ -7,6 +7,7 @@ import {PopupWithForm } from "../components/PopupWithForm.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {Api} from "../components/Api.js";
 import "./index.css";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 
 
 
@@ -16,7 +17,8 @@ const popupProfile = document.querySelector(".popup_profile_submit");
 const popupCard = document.querySelector(".popup_card_submit");
 const nameInput = document.querySelector(".popup__input_name");
 const decriptionInput = document.querySelector(".popup__input_description");
-const popupEditAvatarBtn = document.querySelector(".profile__button_type_add");
+const popupEditAvatarBtn = document.querySelector(".profile__avatar-edit-btn");
+const cardDeleteBtn = document.querySelector(".element__delete");
 let userId;
 
 const initialCards = [
@@ -74,20 +76,39 @@ const handleCardClick = (name, link) => {
     popupWithImage.open(name, link);
 };
 
-const popupWithCard = new PopupWithForm({ popupSelector: ".popup_card_submit", handleCardSubmit: (card) => {
-    cardList.addItem(createCard(card));
+
+const addCard = (data) => {
+    api.addNewCard(data)
+    .then(res => {
+        const cardItem = createCard(res);
+        cardList.addItem(cardItem);
+        popupWithCard.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+
+    });
+}
+
+const popupWithCard = new PopupWithForm({ popupSelector: ".popup_card_submit", handleCardSubmit: data => {
+    addCard(data);
 }})
 popupWithCard.setEventListeners();
+
+
+
+
+
 
 const popupWithProfile = new PopupWithForm({popupSelector: ".popup_profile_submit", handleCardSubmit: (description) => {
 user.setUserInfo(description)
 }})
 popupWithProfile.setEventListeners();
 
-const editAvatar = fieldObj => {
-    api.changeUserAvatar(fieldObj)
-    .then(() => {
-        user.setUserAvatar(fieldObj);
+const editAvatar = (data) => {
+    api.changeUserAvatar(data)
+    .then(res => {
+        user.setUserAvatar(res);
         popupWithAvatar.close();
     })
     .catch(err => console.log(err))
@@ -95,13 +116,14 @@ const editAvatar = fieldObj => {
     });
 }
 
-const popupWithAvatar = new PopupWithForm({popupSelector: ".popup_avatar-edit", handleCardSubmit: fieldObj => { editAvatar(fieldObj);
+const popupWithAvatar = new PopupWithForm({popupSelector: ".popup_avatar_edit", handleCardSubmit: data => { editAvatar(data);
 }});
 popupWithAvatar.setEventListeners();
 
 popupEditAvatarBtn.addEventListener("click", () => {
     popupWithAvatar.open();
 })
+
 
 function likeCard(card, id) {
     if (card.isLiked()) {
@@ -118,9 +140,29 @@ function likeCard(card, id) {
     }
 }
 
+const popupWithConfirmation = new PopupWithConfirmation(".popup__delete-confirm");
+popupWithConfirmation.setEventListeners();
 
-function createCard(item) {
-    const card = new Card(item, "#element__card", handleCardClick, userId, likeCard);
+function handleDeleteClick() {
+    popupWithConfirmation.open();
+}
+
+function deleteCard(id) {
+
+    popupWithConfirmation.handleCardSubmit(() => {
+        api.deleteCard(id)
+        .then(res => {
+            cardItem.handleCardDelete(res);
+            popupWithConfirmation.close();
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    });
+}
+
+function createCard(data) {
+    const card = new Card(data, "#element__card", handleCardClick, userId, likeCard, handleDeleteClick);
     const newCard = card.generateCard();
     return newCard;
 }
