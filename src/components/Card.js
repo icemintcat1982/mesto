@@ -41,7 +41,7 @@ this._likeCard(this, this._id);
   });
 
 this._element.querySelector(".element__delete").addEventListener("click", () => {
-    this._handleDeleteClick(this._element);
+    this._handleDeleteClick(this);
 });
 this._element.querySelector(".element__image").addEventListener("click", () => {
     this._handleCardClick(this._name, this._link);

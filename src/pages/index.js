@@ -20,6 +20,8 @@ const decriptionInput = document.querySelector(".popup__input_description");
 const popupEditAvatarBtn = document.querySelector(".profile__avatar-edit-btn");
 const cardDeleteBtn = document.querySelector(".element__delete");
 let userId;
+let currentCard;
+
 
 const initialCards = [
     {
@@ -140,22 +142,24 @@ function likeCard(card, id) {
     }
 }
 
-const popupWithConfirmation = new PopupWithConfirmation(".popup__delete-confirm");
+const popupWithConfirmation = new PopupWithConfirmation(".popup__delete-confirm", deleteCard);
 popupWithConfirmation.setEventListeners();
 
-function handleDeleteClick() {
+function handleDeleteClick(card) {
     popupWithConfirmation.open();
-        popupWithConfirmation.handleCardSubmit(() => {
-        api.deleteCard(id)
-        .then(res => {
-            cardItem.handleCardDelete(res);
+    currentCard = card;
+}
+
+function deleteCard() {
+        api.deleteCard(currentCard._id)
+        .then(() => {
+            currentCard._element.remove();
             popupWithConfirmation.close();
         })
-        .catch(err => {
+        .catch((err) => {
             console.log(err)
         });
-    });
-}
+    }
 
 
 function createCard(data) {
