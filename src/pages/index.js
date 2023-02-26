@@ -145,11 +145,7 @@ popupWithConfirmation.setEventListeners();
 
 function handleDeleteClick() {
     popupWithConfirmation.open();
-}
-
-function deleteCard(id) {
-
-    popupWithConfirmation.handleCardSubmit(() => {
+        popupWithConfirmation.handleCardSubmit(() => {
         api.deleteCard(id)
         .then(res => {
             cardItem.handleCardDelete(res);
@@ -160,6 +156,7 @@ function deleteCard(id) {
         });
     });
 }
+
 
 function createCard(data) {
     const card = new Card(data, "#element__card", handleCardClick, userId, likeCard, handleDeleteClick);

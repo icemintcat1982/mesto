@@ -4,7 +4,8 @@ import {Popup} from "./Popup";
 export class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._submitCardDelete = document.querySelector(".popup__delete-confirm");
+    this._confirmBtn = document.querySelector(".popup__submit");
+    this._form = this._popupElement.querySelector('.popup__form');
   }
 
 setCardDelete(cardItem) {
@@ -13,11 +14,10 @@ setCardDelete(cardItem) {
 
 setEventListeners() {
   super.setEventListeners();
-  this._form.addEventListener("click", (event) => {
+  this._confirmBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    this._handleCardSubmit();
+    this._handleCardDelete();
   })
 }
-
 
 }
