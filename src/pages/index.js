@@ -85,7 +85,7 @@ const addCard = (data) => {
     .then(res => {
         const cardItem = createCard(res);
         cardList.addItem(cardItem);
-        setTimeout(() => popupWithCard.close(), 2000);
+        setTimeout(() => popupWithCard.close(), 1500);
 
     })
     .catch(err => console.log(err))
@@ -102,21 +102,21 @@ popupWithCard.setEventListeners();
 
 
 
-
-
 const popupWithProfile = new PopupWithForm({popupSelector: ".popup_profile_submit", handleCardSubmit: (description) => {
 user.setUserInfo(description)
 }})
 popupWithProfile.setEventListeners();
 
 const editAvatar = (data) => {
+    popupWithAvatar.popupLoading(true);
     api.changeUserAvatar(data)
     .then(res => {
         user.setUserAvatar(res);
-        popupWithAvatar.close();
+        setTimeout(() => popupWithAvatar.close(), 1500);
     })
     .catch(err => console.log(err))
     .finally(() => {
+        popupWithCard.popupLoading(false);
     });
 }
 
