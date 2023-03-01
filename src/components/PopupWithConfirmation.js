@@ -15,7 +15,7 @@ setCardDelete(cardItem) {
 
 setEventListeners() {
   super.setEventListeners();
-  this._confirmBtn.addEventListener("click", (event) => {
+  this._form.addEventListener("submit", (event) => {
     event.preventDefault();
     this._deleteCard();
   })
