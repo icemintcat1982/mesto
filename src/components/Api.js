@@ -34,7 +34,7 @@ updateUserInfo(userData) {
         headers: this._headers,
         body: JSON.stringify({
             name: userData.name,
-            about: userData.about
+            about: userData.description
         })
     })
     .then(this._checkResult)

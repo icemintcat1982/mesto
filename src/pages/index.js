@@ -100,10 +100,22 @@ const popupWithCard = new PopupWithForm({ popupSelector: ".popup_card_submit", h
 popupWithCard.setEventListeners();
 
 
+const updateProfile = (userData) => {
+popupWithProfile.popupLoading(true);
+api.updateUserInfo(userData)
+.then(res => {
+    user.setUserInfo(res);
+    setTimeout(() => popupWithProfile.close(), 1500);
 
+})
+.catch(err => console.log(err))
+.finally(() => {
+    popupWithProfile.popupLoading(false);
+});
+}
 
-const popupWithProfile = new PopupWithForm({popupSelector: ".popup_profile_submit", handleCardSubmit: (description) => {
-user.setUserInfo(description)
+const popupWithProfile = new PopupWithForm({popupSelector: ".popup_profile_submit", handleCardSubmit: userData => {
+updateProfile(userData);
 }})
 popupWithProfile.setEventListeners();
 
