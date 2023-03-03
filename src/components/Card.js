@@ -66,7 +66,7 @@ handleCardLike(likes) {
   this._totalLikes.textContent = this._likes.length;
 }
 
-handleCardDelete() {
+handleCardDelete = () => {
 this._element.remove();
 this._element = null;
 }

@@ -2,9 +2,6 @@ export class FormValidator {
     constructor(config, formElement) {
         this._config = config;
         this._formElement = formElement;
-        this._errorElement = this._formElement.querySelector(
-            this._config.inputErrorClass
-        );
         this._btnElement = this._formElement.querySelector(
             this._config.submitBtnSelector
         );
