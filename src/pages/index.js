@@ -59,15 +59,6 @@ const api = new Api({
     }
 });
 
-// api.getUserInfo()
-// .then((res) => {user.setUserInfo(res);
-//     userId = res._id;
-//     console.log(userId);
-// });
-
-// api.getCards()
-// .then((res) => {console.log(res),
-// cardList.renderItems(res)});
 
 Promise.all([
     api.getUserInfo(),
